@@ -1,13 +1,31 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
 ---
-<Layout title="Affiliate Disclosure">
-  <main>
-    <h1>Affiliate Disclosure</h1>
-    <p>
-      NoPrincessHockey.com participates in affiliate marketing programs, which means
-      we may earn a commission from qualifying purchases made through links on this site,
-      at no additional cost to you. We only recommend gear we've personally researched or tested.
-    </p>
-  </main>
-</Layout>
+
+<html lang="en">
+  <head>
+    <BaseHead title="Affiliate Disclosure" description="Affiliate disclosure for NoPrincessHockey.com" />
+  </head>
+
+  <body>
+    <Header />
+
+    <main>
+      <article>
+        <div class="prose">
+          <h1>Affiliate Disclosure</h1>
+
+          <p>
+            NoPrincessHockey.com participates in affiliate marketing programs, which means
+            we may earn a commission from qualifying purchases made through links on this site,
+            at no additional cost to you. We only recommend gear we've personally researched or tested.
+          </p>
+        </div>
+      </article>
+    </main>
+
+    <Footer />
+  </body>
+</html>
