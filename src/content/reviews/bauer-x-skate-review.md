@@ -6,7 +6,7 @@ category: "skates"
 rating: 4
 price: "$149.99"
 affiliateLink: "https://example.com/replace-with-real-affiliate-link"
-pubDate: 2026-08-26
+pubDate: Aug 26 2022
 pros:
   - "Narrower heel fit designed for women's foot shape"
   - "Good ankle support for beginner/intermediate players"
