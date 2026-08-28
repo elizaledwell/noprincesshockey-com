@@ -1,0 +1,131 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+
+type Props = CollectionEntry<'reviews'>['data'];
+
+const { title, brand, productName, category, rating, price, affiliateLink, pubDate, pros, cons, summary } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={summary} />
+		<style>
+			main {
+				width: calc(100% - 2em);
+				max-width: 100%;
+				margin: 0;
+			}
+			.prose {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+				color: rgb(var(--gray-dark));
+			}
+			.title {
+				margin-bottom: 1em;
+				padding: 1em 0;
+				text-align: center;
+				line-height: 1;
+			}
+			.title h1 {
+				margin: 0 0 0.5em 0;
+			}
+			.date {
+				margin-bottom: 0.5em;
+				color: rgb(var(--gray));
+			}
+			.rating {
+				font-size: 1.5rem;
+				color: rgb(var(--accent));
+			}
+			.meta-box {
+				background: rgb(var(--gray-light));
+				border-radius: 12px;
+				padding: 1.5em;
+				margin: 1.5em 0;
+			}
+			.meta-box p {
+				margin: 0.3em 0;
+			}
+			.pros-cons {
+				display: flex;
+				gap: 2em;
+				margin: 1.5em 0;
+			}
+			.pros-cons div {
+				flex: 1;
+			}
+			.pros-cons h3 {
+				margin-bottom: 0.5em;
+			}
+			.cta-button {
+				display: inline-block;
+				background: rgb(var(--accent));
+				color: white;
+				padding: 0.75em 1.5em;
+				border-radius: 8px;
+				text-decoration: none;
+				font-weight: bold;
+				margin-top: 1em;
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<article>
+				<div class="prose">
+					<div class="title">
+						<p class="date">
+							<FormattedDate date={pubDate} />
+						</p>
+						<h1>{title}</h1>
+						<p class="rating">{'★'.repeat(rating)}{'☆'.repeat(5 - rating)}</p>
+						<hr />
+					</div>
+
+					<div class="meta-box">
+						<p><strong>Brand:</strong> {brand}</p>
+						<p><strong>Product:</strong> {productName}</p>
+						<p><strong>Category:</strong> {category}</p>
+						{price && <p><strong>Price:</strong> {price}</p>}
+					</div>
+
+					<p>{summary}</p>
+
+					<div class="pros-cons">
+						<div>
+							<h3>Pros</h3>
+							<ul>
+								{pros.map((pro) => <li>{pro}</li>)}
+							</ul>
+						</div>
+						<div>
+							<h3>Cons</h3>
+							<ul>
+								{cons.map((con) => <li>{con}</li>)}
+							</ul>
+						</div>
+					</div>
+
+					<slot />
+
+					{affiliateLink && (
+						<p>
+							<a class="cta-button" href={affiliateLink} target="_blank" rel="nofollow sponsored noopener">
+								Check Current Price →
+							</a>
+						</p>
+					)}
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>
