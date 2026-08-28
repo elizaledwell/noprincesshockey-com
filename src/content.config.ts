@@ -18,20 +18,20 @@ const blog = defineCollection({
 });
 
 const reviews = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    brand: z.string(),
-    productName: z.string(),
-    category: z.enum(['skates', 'gloves', 'chest-protector', 'pants', 'base-layer', 'stick', 'helmet', 'other']),
-    rating: z.number().min(1).max(5),
-    price: z.string().optional(),
-    affiliateLink: z.string().url().optional(),
-    pubDate: z.coerce.date(),
-    pros: z.array(z.string()),
-    cons: z.array(z.string()),
-    summary: z.string(),
-  }),
+	loader: glob({ base: './src/content/reviews', pattern: '**/*.{md,mdx}' }),
+	schema: z.object({
+		title: z.string(),
+		brand: z.string(),
+		productName: z.string(),
+		category: z.enum(['skates', 'gloves', 'chest-protector', 'pants', 'base-layer', 'stick', 'helmet', 'other']),
+		rating: z.number().min(1).max(5),
+		price: z.string().optional(),
+		affiliateLink: z.string().url().optional(),
+		pubDate: z.coerce.date(),
+		pros: z.array(z.string()),
+		cons: z.array(z.string()),
+		summary: z.string(),
+	}),
 });
 
 export const collections = { blog, reviews };
